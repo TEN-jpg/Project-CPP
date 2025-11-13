@@ -1,37 +1,55 @@
 #include <iostream>
 #include <ctime>
+#include <windows.h>
+using namespace std;
 
-int main()
-{
 
-    int Number;
-    int guess;
-    int tries = 0;
-    
+int main(){
+    cout<<"\033[35m"<< "======================================= NUMBER GUESSING GAME =======================================\n"<<"\033[0m";
     srand(time(NULL));
-    Number = (rand() % 100) + 1;
-
-    std::cout << "----------NUMBER GUESSING GAME------------\n";
+    int number_to_guess = (rand() % 100) + 1;
+    int user_guess;
+    int attempt = 0;
+    string restart;
+    
     do{
-       std::cout << "Enter a guess (1-100): ";
-       std::cin >> guess;
-       tries++;
+        cout<< "\033[33m"<< "Generating a number"<<"\033[0m";
+        Sleep(500);
+        cout<<".";
+        Sleep(500);
+        cout<<".";
+        Sleep(500);
+        cout<<".\n";       
+        int number_to_guess = (rand() % 100) + 1;
+        attempt = 0;
+        user_guess = 0;
 
-       if(guess < Number){
-          std::cout << "Too Low!\n";
+    
+    do{
+        cout<< "Enter your guess(1-100): ";
+        cin>> user_guess;
+        if(user_guess <= 0 || user_guess > 100){
+            cout<<"\033[31m"<<"Invalid Input! Enter a number between (1-100)\n"<<"\033[0m";
         }
-       else if(guess > Number){
-          std::cout << "Too High!\n";
+        else{
+            attempt++;
+        if(user_guess > number_to_guess){
+            cout<< "Too High!\n";
         }
-       else{
-          std::cout << "CORRECT! You guessed the number in " << tries << " " << "tries\n";
+        else if(user_guess < number_to_guess){
+            cout<< "Too Low!\n";
         }
+        }
+        
+        
+    }while(user_guess != number_to_guess);
+    
+    cout<<"\033[32m"<<"Great! You guessd the number "<< "in "<< attempt<< " tries\n"<<"\033[0m";
+    cout<<"------------------------------------------------------------\n";
+    cout<<"\033[33m"<<"Do you wnat to play again(Y/N): "<<"\033[0m";
+    cin>> restart;
+    }while(restart == "y" || restart == "Y");
+    cout<<"\033[35m"<<"======================================= Thanks for playing! Bye! ======================================="<<"\033[0m";
 
-    }while (guess != Number);
-
-    std::cout << "----------------------------------------------";
-
-
-     return 0;
-
+    return 0;
 }
