@@ -72,7 +72,7 @@ void playerMove(char *spaces, char player){
             spaces[num] = player;
             break;
         }
-    }while(!num > 0 || !num < 8);
+    }while(num < 0 || num > 8);
 
 
 }
